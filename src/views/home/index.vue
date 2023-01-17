@@ -3,7 +3,6 @@
         home
         <span>d</span>
         <el-button>dd</el-button>
-        <el-empty description="description" />
     </div>
 </template>
 
