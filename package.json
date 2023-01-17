@@ -9,11 +9,12 @@
         "preview": "vite preview",
         "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
         "prettier": "prettier --write .",
-        "commit":"git-cz"
+        "prepare": "husky install",
+        "commit": "git-cz"
     },
     "config": {
         "commitizen": {
-          	"path": "node_modules/cz-customizable"
+            "path": "node_modules/cz-conventional-changelog"
         }
     },
     "dependencies": {
@@ -34,11 +35,11 @@
         "commitizen": "^4.2.6",
         "commitlint-config-cz": "^0.13.3",
         "cz-conventional-changelog": "^3.3.0",
-        "cz-customizable": "^7.0.0",
         "eslint": "^8.32.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-prettier": "^4.2.1",
         "eslint-plugin-vue": "^9.9.0",
+        "husky": "^8.0.3",
         "prettier": "^2.8.3",
         "sass": "^1.57.1",
         "sass-loader": "^13.2.0",
