@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 13:20:38
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 15:18:45
+ * @LastEditTime: 2023-01-18 15:37:46
  */
 import { defineStore } from 'pinia';
 import { userLogin, userRegister } from '@/apis/user';
@@ -40,7 +40,7 @@ const useUser = defineStore({
                 setAuthToken(token);
                 setAuthUserInfo(userInfo);
                 router.push({
-                    path: '/',
+                    path: '/home',
                 });
             } else {
                 return ElMessage.error(message);

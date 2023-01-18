@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-18 15:01:05
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 15:06:07
+ * @LastEditTime: 2023-01-18 16:13:28
  */
 export function getSession(key: string) {
     if (!key) throw new Error('key不能为空');
@@ -12,7 +12,7 @@ export function getSession(key: string) {
 }
 
 export function setSession(key: string, value: any) {
-    if (!key) throw new Error('key不能为空');
+    if (!key || !value) throw new Error('key or value不能为空');
     return sessionStorage.setItem(key, JSON.stringify(value));
 }
 

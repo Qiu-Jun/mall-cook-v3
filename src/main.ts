@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 14:38:43
+ * @LastEditTime: 2023-01-18 16:04:55
  */
 import { createApp } from 'vue';
 import store from '@/store';
@@ -18,8 +18,8 @@ import 'element-plus/theme-chalk/el-notification.css';
 
 function bootStrap() {
     const app = createApp(App);
-    app.use(router);
     app.use(store);
+    app.use(router);
     app.mount('#app');
 }
 
