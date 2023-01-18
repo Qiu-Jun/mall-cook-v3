@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CreateDialog: typeof import('./src/components/CreateDialog/index.vue')['default']
+    CustomSchemaTemplateSet: typeof import('./src/components/custom-schema-template-set/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']

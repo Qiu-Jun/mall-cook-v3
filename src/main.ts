@@ -3,13 +3,15 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 18:55:34
+ * @LastEditTime: 2023-01-19 00:00:23
  */
 import { createApp } from 'vue';
 import store from '@/store';
 import router from '@/router';
 import App from './App.vue';
 import { registerGlobalComponents } from '@/utils/globalRegister';
+// 适配
+import '@/utils/adapter.js';
 
 import '@/styles/index.scss';
 import '@/styles/element/index.css';

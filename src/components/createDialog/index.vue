@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-17 16:35:21
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 19:25:37
+ * @LastEditTime: 2023-01-19 00:35:02
 -->
 <template>
     <el-dialog v-model:visible="show" width="40%" top="300px">
@@ -48,11 +48,17 @@
         </div>
 
         <!-- submit -->
-        <div slot="footer" class="dialog-footer flex-center">
-            <el-button type="primary" round style="width: 140px" @click="submit"
-                >保存</el-button
-            >
-        </div>
+        <template #footer>
+            <div class="dialog-footer flex-center">
+                <el-button
+                    type="primary"
+                    round
+                    style="width: 140px"
+                    @click="submit"
+                    >保存</el-button
+                >
+            </div>
+        </template>
     </el-dialog>
 </template>
 
