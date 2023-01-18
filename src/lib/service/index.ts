@@ -1,5 +1,13 @@
+/*
+ * @Author: June
+ * @Description:
+ * @Date: 2023-01-17 13:31:07
+ * @LastEditors: June
+ * @LastEditTime: 2023-01-18 15:28:28
+ */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { ElMessage } from 'element-plus';
+import store from '@/store';
 import { get } from 'lodash-es';
 
 const service: AxiosInstance = axios.create({
@@ -11,7 +19,7 @@ const service: AxiosInstance = axios.create({
 service.interceptors.request.use(
     (config: AxiosRequestConfig) => {
         config.headers = {
-            token: '',
+            Authorization: store.state.value.user.token,
             'Content-Type': 'application/json',
         };
         return config;
@@ -26,23 +34,7 @@ service.interceptors.response.use(
         const { status, data: resData } = response;
         if (status !== 200) return Promise.reject(new Error('请求失败'));
         return new Promise((resolve, reject) => {
-            const { code, msg, data } = resData;
-            switch (code) {
-                case 200:
-                    ElMessageBox({
-                        type: 'success',
-                        message: 'ok',
-                    });
-                    resolve({
-                        code,
-                        data,
-                    });
-                    break;
-                default:
-                    ElMessage.error(msg || 'Error');
-                    reject(new Error('请求错误'));
-                    break;
-            }
+            resolve(resData);
         });
     },
     (error: any) => {
