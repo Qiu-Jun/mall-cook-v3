@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 13:20:38
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 15:37:46
+ * @LastEditTime: 2023-01-18 19:27:32
  */
 import { defineStore } from 'pinia';
 import { userLogin, userRegister } from '@/apis/user';
@@ -65,6 +65,13 @@ const useUser = defineStore({
             } else {
                 return ElMessage.error(message);
             }
+        },
+
+        doLogout() {
+            this.token = null;
+            this.userInfo = null;
+            sessionStorage.clear();
+            localStorage.clear();
         },
     },
 });
