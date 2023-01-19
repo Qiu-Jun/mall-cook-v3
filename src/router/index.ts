@@ -3,11 +3,13 @@
  * @Description:
  * @Date: 2023-01-17 13:21:40
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 16:11:58
+ * @LastEditTime: 2023-01-19 18:16:59
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { getAuthToken } from '@/utils/auth';
+import store from '@/store';
+import useUser from '@/store/modules/user';
 
+const userStore = useUser(store);
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
@@ -45,8 +47,7 @@ router.beforeEach((to, from, next) => {
     if (to.name === 'Login') {
         next();
     } else {
-        const token = getAuthToken();
-        if (!token) {
+        if (!userStore.token) {
             next('/login');
         } else {
             next();
