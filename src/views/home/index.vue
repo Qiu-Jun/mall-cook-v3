@@ -49,12 +49,15 @@
         <!-- 页尾 -->
         <div class="footer"></div>
     </div>
+
+    <create-dialog ref="createDialogRef" />
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import { debounce, cloneDeep } from 'lodash-es';
+import createDialog from '@/components/createDialog/index';
 import { getProjectList, delProject } from '@/apis/project';
 import useUser from '@/store/modules/user';
 import { mallTypeList } from '@/config/mall';
@@ -67,6 +70,8 @@ const state = reactive({
     loading: false,
     list: [],
 });
+
+const createDialogRef = ref(null);
 
 const getProject = async () => {
     const map = new Map();
@@ -106,7 +111,7 @@ const handleDel = debounce(function (id) {
 }, 300);
 
 const handleCreate = debounce(function () {
-    console.log('d');
+    createDialogRef.value.open();
 }, 300);
 
 const handleLogout = () => {

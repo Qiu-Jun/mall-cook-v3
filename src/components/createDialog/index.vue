@@ -3,38 +3,46 @@
  * @Description: 
  * @Date: 2023-01-17 16:35:21
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 00:35:02
+ * @LastEditTime: 2023-01-19 22:33:17
 -->
 <template>
-    <el-dialog v-model:visible="show" width="40%" top="300px">
+    <el-dialog
+        v-model="state.show"
+        width="35%"
+        top="300px"
+        @before-close="onDialogClose"
+    >
         <div class="flex-column col-center">
             <!-- form -->
             <el-form
-                ref="form"
-                :model="form"
+                ref="formRef"
+                :model="state.form"
+                :rules="state.formRules"
                 label-width="80px"
                 style="width: 300px"
             >
-                <el-form-item label="名称" prop="name" verify>
-                    <el-input v-model="form.name" type="text" />
+                <el-form-item label="名称" prop="name">
+                    <el-input
+                        v-model="state.form.name"
+                        placeholder="请输入名称"
+                        type="text"
+                    />
                 </el-form-item>
 
-                <el-form-item
-                    label="类型"
-                    prop="name"
-                    verify
-                    class="form-item-none"
-                >
-                    <el-radio v-model="form.type" label="mall"
+                <el-form-item label="类型" prop="type" class="form-item-none">
+                    <el-radio v-model="state.form.type" label="mall"
                         >电商商城</el-radio
                     >
-                    <el-radio v-model="form.type" label="model"
+                    <el-radio v-model="state.form.type" label="model"
                         >商城模板</el-radio
                     >
                 </el-form-item>
 
-                <el-form-item label="行业" prop="name" verify>
-                    <el-select v-model="form.industry" placeholder="请选择行业">
+                <el-form-item label="行业" prop="industry">
+                    <el-select
+                        v-model="state.form.industry"
+                        placeholder="请选择行业"
+                    >
                         <el-option
                             v-for="item in mallIndustryList"
                             :key="item.value"
@@ -54,7 +62,7 @@
                     type="primary"
                     round
                     style="width: 140px"
-                    @click="submit"
+                    @click="handleSubmit"
                     >保存</el-button
                 >
             </div>
@@ -62,76 +70,88 @@
     </el-dialog>
 </template>
 
-<script>
-import { addProject, editProject } from '@/api/project';
-import { mapGetters, mapMutations } from 'vuex';
+<script setup>
+import { reactive, ref } from 'vue';
+import { addProject } from '@/apis/project';
 import { rojectModel } from '@/config/project';
 import { mallIndustryList, mallTypeList } from '@/config/mall';
+import { debounce } from 'lodash-es';
+import useUser from '@/store/modules/user';
+import useProject from '@/store/modules/project';
+import { useRouter } from 'vue-router';
 
-export default {
-    name: 'CreateDialog',
+defineExpose({
+    open,
+});
 
-    data() {
-        return {
-            mallIndustryList,
-            show: false,
-            form: {
-                type: 'mall',
+const userStore = useUser();
+const projectStore = useProject();
+const router = useRouter();
+
+const state = reactive({
+    show: false,
+    form: {
+        type: 'mall',
+        name: '',
+        industry: '',
+    },
+    formRules: {
+        name: [
+            {
+                required: true,
+                message: '请输入名称',
+                trigger: 'blur',
             },
-        };
+        ],
+        industry: [
+            {
+                required: true,
+                message: '请选择行业',
+                trigger: 'blur',
+            },
+        ],
     },
+});
 
-    computed: {
-        ...mapGetters(['userInfo']),
-    },
+const formRef = ref(null);
 
-    methods: {
-        ...mapMutations(['setProject']),
-
-        open() {
-            this.show = true;
-        },
-
-        submit() {
-            this.$refs['form'].validate((valid) => {
-                if (valid) {
-                    this.create();
-                }
-            });
-        },
-
-        /**
-         * 创建商城
-         */
-        async create() {
-            let map = new Map();
-            mallTypeList.map((item) => map.set(item.type, item.logo));
-
-            let project = {
-                ...this.$cloneDeep(rojectModel),
-                ...this.form,
-                ...{
-                    userId: this.userInfo.userId,
-                    logo: map.get(this.form.type),
-                },
-            };
-
-            let { status, id } = await addProject(project);
-
-            if (status == '10000') {
-                project.id = id;
-                this.setProject(project);
-                this.$router.push({ name: 'mall' });
-            }
-        },
-    },
+function open() {
+    state.show = true;
+}
+const onDialogClose = () => {
+    state.show = false;
+    formRef.value.resetFields();
 };
+
+const handleSubmit = debounce(function () {
+    formRef.value.validate(async (valid) => {
+        if (valid) {
+            const _map = new Map();
+            mallTypeList.map((item) => _map.set(item.type, item.logo));
+            const project = {
+                ...rojectModel,
+                ...state.form,
+                userId: userStore.userInfo.userId,
+                logo: _map.get(state.form.type),
+            };
+            const { status, id, message } = await addProject(project);
+            if (status === '10000') {
+                project.id = id;
+                projectStore.setProject(project);
+                router.push({
+                    path: '/mall',
+                });
+            } else {
+                ElMessage.error(message);
+            }
+        }
+    });
+}, 300);
 </script>
 
 <style lang="scss" scoped>
-input {
-    border: 0;
-    margin-bottom: 5px;
+:deep(.el-input__wrapper) {
+    box-shadow: none;
 }
 
 :deep(.el-form-item) {
@@ -148,20 +168,24 @@ input {
     }
 }
 
-::v-deep .el-button--primary {
+:deep(.el-button--primary) {
     background: $color-theme !important;
 }
 
-::v-deep .el-select {
+:deep(.el-select) {
     width: 100%;
 
-    input {
-        padding-left: 0;
-        border: 0;
+    .el-input.is-focus .el-input__wrapper {
+        box-shadow: none !important;
+    }
+    .el-input__wrapper.is-focus {
+        box-shadow: none !important;
     }
 }
-
-::v-deep .el-input__inner {
+:deep(.el-select:hover:not(.el-select--disabled)) .el-input__wrapper {
+    box-shadow: none !important;
+}
+:deep(.el-input__inner) {
     border: 0px;
     margin: 0px;
     padding: 0px;
