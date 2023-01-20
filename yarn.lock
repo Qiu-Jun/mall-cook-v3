@@ -2023,6 +2023,11 @@ isexe@^2.0.0:
   resolved "https://registry.npmmirror.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
+jr-qrcode@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/jr-qrcode/-/jr-qrcode-1.1.4.tgz#c419bf3ab655f3233360308939d71b13849690be"
+  integrity sha512-041B7axC/tzKRFbCc4g5QCaPzga2IgyBGmUBkWQ+t4CMl83DBzFv9tq9XdJr7uIqe9X6zYZC7Cy5J9ttiBNxrw==
+
 js-sdsl@^4.1.4:
   version "4.2.0"
   resolved "https://registry.npmmirror.com/js-sdsl/-/js-sdsl-4.2.0.tgz#278e98b7bea589b8baaf048c20aeb19eb7ad09d0"
@@ -3000,6 +3005,11 @@ through2@^4.0.0:
   version "2.3.8"
   resolved "https://registry.npmmirror.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
+
+tinymce@^6.3.1:
+  version "6.3.1"
+  resolved "https://registry.npmmirror.com/tinymce/-/tinymce-6.3.1.tgz#cc5cf2b9f702d429cf5d1d21ed62245d768bfc4f"
+  integrity sha512-+oCwXuTxAdJXVJ0130OxQz0JDNsqg3deuzgeUo8X5Vb27EzCJgXwO5eWvCxvkxpQo4oiHMVlM4tUIpTUHufHGQ==
 
 tmp@^0.0.33:
   version "0.0.33"

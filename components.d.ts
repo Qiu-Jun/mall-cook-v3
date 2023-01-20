@@ -19,8 +19,13 @@ declare module '@vue/runtime-core' {
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     GitControl: typeof import('./src/components/global/gitControl.vue')['default']
+    HomeCover: typeof import('./src/components/saveDialog/homeCover.vue')['default']
+    PhoneCtn: typeof import('./src/components/global/phoneCtn.vue')['default']
+    QrDialog: typeof import('./src/components/qrDialog/index.vue')['default']
+    RealTimeView: typeof import('./src/components/realTimeView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SaveDialog: typeof import('./src/components/saveDialog/index.vue')['default']
     TopBar: typeof import('./src/components/topBar/index.vue')['default']
   }
   export interface ComponentCustomProperties {

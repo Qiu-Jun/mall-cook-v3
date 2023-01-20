@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-18 23:58:39
  * @LastEditors: June
- * @LastEditTime: 2023-01-20 11:58:30
+ * @LastEditTime: 2023-01-20 13:41:11
 -->
 <template>
     <div class="main">
@@ -31,11 +31,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed } from 'vue';
+import { reactive, computed, onMounted, onBeforeUnmount } from 'vue';
 import useProject from '@/store/modules/project';
+import { settingProject } from '@/utils/auth';
 
 const projectStore = useProject();
 const project = computed(() => projectStore.project);
+
 const state = reactive({
     meauList: [
         {
@@ -64,6 +66,17 @@ const state = reactive({
             path: '/mall/model-manage',
         },
     ],
+});
+
+const setProject = () => settingProject(project);
+
+onMounted(() => {
+    projectStore.setHomePage();
+    window.addEventListener('beforeunload', setProject);
+});
+
+onBeforeUnmount(() => {
+    window.removeEventListener('beforeunload', setProject);
 });
 </script>
 

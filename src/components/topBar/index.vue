@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-19 22:40:27
  * @LastEditors: June
- * @LastEditTime: 2023-01-20 13:09:12
+ * @LastEditTime: 2023-01-20 13:35:07
 -->
 <template>
     <div class="topBar">
@@ -15,29 +15,27 @@
             <git-control />
             <el-button size="small" @click="toSchema">schema 生成器</el-button>
 
-            <el-button size="small ml10" @click="viewQr">商城二维码</el-button>
+            <el-button size="small" @click="viewQr">商城二维码</el-button>
 
-            <el-button size="small ml10" @click="state.show = true"
+            <el-button size="small" @click="state.show = true"
                 >实时预览</el-button
             >
 
-            <el-button size="small f-white bg-theme" @click="handleSave"
-                >保存</el-button
-            >
+            <el-button size="small" @click="handleSave">保存</el-button>
 
-            <el-button size="small ml10" @click="onLogout">退出</el-button>
+            <el-button size="small" @click="onLogout">退出</el-button>
         </div>
     </div>
 
-    <!-- <real-timeView v-model:show="show"></real-timeView>
+    <realTimeView v-model:show="state.show" />
 
-    <save-dialog ref="save"></save-dialog>
+    <saveDialg ref="save" />
 
-    <qr-dialog ref="qr"></qr-dialog> -->
+    <qrDialog ref="qr" />
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { reactive, defineAsyncComponent } from 'vue';
 import { debounce } from 'lodash-es';
 import { useRouter } from 'vue-router';
 import useUser from '@/store/modules/user';
@@ -45,6 +43,19 @@ import { ElMessageBox } from 'element-plus';
 
 const router = useRouter();
 const userStore = useUser();
+
+// 异步组件
+const saveDialg = defineAsyncComponent(
+    () => import('@/components/saveDialog/index.vue'),
+);
+
+const realTimeView = defineAsyncComponent(
+    () => import('@/components/realTimeView/index.vue'),
+);
+
+const qrDialog = defineAsyncComponent(
+    () => import('@/components/qrDialog/index.vue'),
+);
 
 const state = reactive({
     show: false,
