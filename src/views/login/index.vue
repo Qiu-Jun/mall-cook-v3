@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-17 13:22:24
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 14:53:24
+ * @LastEditTime: 2023-01-20 12:56:06
 -->
 <template>
     <div class="login">
@@ -110,13 +110,14 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { debounce } from 'lodash-es';
 import useUser from '@/store/modules/user';
+import type { FormInstance } from 'element-plus';
 
-const loginRef = ref(null);
-const registerRef = ref(null);
+const loginRef = ref<FormInstance>();
+const registerRef = ref<FormInstance>();
 const userStore = useUser();
 
 const state = reactive({
@@ -192,10 +193,10 @@ const handleTab = debounce(function (e) {
     state.active = tabObj.tab;
     switch (tabObj.tab) {
         case 'register':
-            loginRef.value.resetFields();
+            loginRef.value?.resetFields();
             break;
         case 'login':
-            registerRef.value.resetFields();
+            registerRef.value?.resetFields();
             break;
         default:
             break;
@@ -204,7 +205,7 @@ const handleTab = debounce(function (e) {
 
 // 登录
 const handleLogin = debounce(function () {
-    loginRef.value.validate((valid) => {
+    loginRef.value?.validate((valid: boolean) => {
         if (valid) {
             userStore.doLogin(state.loginForm);
         }
@@ -212,10 +213,10 @@ const handleLogin = debounce(function () {
 }, 500);
 
 const handleRegister = debounce(function () {
-    registerRef.value.validate((valid) => {
+    registerRef.value?.validate((valid) => {
         if (valid) {
             userStore.doRegister(state.registerForm, () => {
-                registerRef.value.resetFields();
+                registerRef.value?.resetFields();
                 state.active = 'login';
             });
         }

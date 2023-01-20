@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 13:20:38
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 19:27:32
+ * @LastEditTime: 2023-01-20 12:45:08
  */
 import { defineStore } from 'pinia';
 import { userLogin, userRegister } from '@/apis/user';
@@ -25,7 +25,7 @@ const useUser = defineStore({
         };
     },
     actions: {
-        async doLogin(loginForm: { username: string; password: string }) {
+        async doLogin(loginForm: any) {
             const { status, message, userInfo, token } = await userLogin(
                 loginForm,
             );
@@ -46,14 +46,7 @@ const useUser = defineStore({
                 return ElMessage.error(message);
             }
         },
-        async doRegister(
-            registerForm: {
-                username: string;
-                password: string;
-                userName: string;
-            },
-            cb: any,
-        ) {
+        async doRegister(registerForm: any, cb: any) {
             const { status, message } = await userRegister(registerForm);
             if (status === '10000') {
                 ElNotification({

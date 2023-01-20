@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-18 23:58:39
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 22:57:17
+ * @LastEditTime: 2023-01-20 11:58:30
 -->
 <template>
     <div class="main">
@@ -30,10 +30,9 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, computed } from 'vue';
 import useProject from '@/store/modules/project';
-// import topBar from '@/components/topBar/index.vue';
 
 const projectStore = useProject();
 const project = computed(() => projectStore.project);

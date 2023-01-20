@@ -53,11 +53,10 @@
     <create-dialog ref="createDialogRef" />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import { debounce, cloneDeep } from 'lodash-es';
-import createDialog from '@/components/createDialog/index';
 import { getProjectList, delProject } from '@/apis/project';
 import useUser from '@/store/modules/user';
 import { mallTypeList } from '@/config/mall';
@@ -66,17 +65,17 @@ import { useRouter } from 'vue-router';
 const userStore = useUser();
 const router = useRouter();
 
-const state = reactive({
+const state = reactive<any>({
     loading: false,
     list: [],
 });
 
-const createDialogRef = ref(null);
+const createDialogRef = ref<any>();
 
 const getProject = async () => {
     const map = new Map();
     const temp = cloneDeep(mallTypeList);
-    temp.forEach((item) => {
+    temp.forEach((item: any) => {
         item.list = [];
         map.set(item.type, item.list);
     });
@@ -84,7 +83,7 @@ const getProject = async () => {
         userId: userStore.userInfo.userId,
     });
     if (status === '10000') {
-        list.forEach((item) => {
+        list.forEach((item: any) => {
             let value = map.get(item.type);
             value.push(item);
         });
@@ -111,7 +110,7 @@ const handleDel = debounce(function (id) {
 }, 300);
 
 const handleCreate = debounce(function () {
-    createDialogRef.value.open();
+    createDialogRef.value?.open();
 }, 300);
 
 const handleLogout = () => {

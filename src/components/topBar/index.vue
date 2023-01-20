@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-19 22:40:27
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 22:45:52
+ * @LastEditTime: 2023-01-20 13:09:12
 -->
 <template>
     <div class="topBar">
@@ -17,7 +17,7 @@
 
             <el-button size="small ml10" @click="viewQr">商城二维码</el-button>
 
-            <el-button size="small ml10" @click="show = true"
+            <el-button size="small ml10" @click="state.show = true"
                 >实时预览</el-button
             >
 
@@ -36,11 +36,19 @@
     <qr-dialog ref="qr"></qr-dialog> -->
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import { reactive } from 'vue';
 import { debounce } from 'lodash-es';
 import { useRouter } from 'vue-router';
+import useUser from '@/store/modules/user';
+import { ElMessageBox } from 'element-plus';
 
 const router = useRouter();
+const userStore = useUser();
+
+const state = reactive({
+    show: false,
+});
 
 const handleBack = debounce(function () {
     router.push({
@@ -50,6 +58,27 @@ const handleBack = debounce(function () {
 
 const handleSave = debounce(function () {
     console.log('1');
+}, 300);
+
+const toSchema = debounce(function () {
+    console.log('toSchema');
+}, 300);
+
+const viewQr = debounce(function () {
+    console.log('viewQr');
+}, 300);
+
+const onLogout = debounce(function () {
+    ElMessageBox.confirm('删除商城后将不可恢复, 是否继续?', '删除商城', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(() => {
+        userStore.doLogout();
+        router.push({
+            path: '/login',
+        });
+    });
 }, 300);
 </script>
 

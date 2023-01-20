@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-18 17:26:19
  * @LastEditors: June
- * @LastEditTime: 2023-01-18 17:28:36
+ * @LastEditTime: 2023-01-20 13:05:15
 -->
 <template>
     <img
@@ -12,7 +12,7 @@
     />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { debounce } from 'lodash-es';
 
 const handleToGit = debounce(function () {

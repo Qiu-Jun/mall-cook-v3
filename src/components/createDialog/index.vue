@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-17 16:35:21
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 22:33:17
+ * @LastEditTime: 2023-01-20 13:04:59
 -->
 <template>
     <el-dialog
@@ -70,7 +70,7 @@
     </el-dialog>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { addProject } from '@/apis/project';
 import { rojectModel } from '@/config/project';
@@ -79,6 +79,7 @@ import { debounce } from 'lodash-es';
 import useUser from '@/store/modules/user';
 import useProject from '@/store/modules/project';
 import { useRouter } from 'vue-router';
+import { ElMessage, FormInstance } from 'element-plus';
 
 defineExpose({
     open,
@@ -113,22 +114,22 @@ const state = reactive({
     },
 });
 
-const formRef = ref(null);
+const formRef = ref<FormInstance>();
 
 function open() {
     state.show = true;
 }
 const onDialogClose = () => {
     state.show = false;
-    formRef.value.resetFields();
+    formRef.value?.resetFields();
 };
 
 const handleSubmit = debounce(function () {
-    formRef.value.validate(async (valid) => {
+    formRef.value?.validate(async (valid) => {
         if (valid) {
             const _map = new Map();
             mallTypeList.map((item) => _map.set(item.type, item.logo));
-            const project = {
+            const project: any = {
                 ...rojectModel,
                 ...state.form,
                 userId: userStore.userInfo.userId,

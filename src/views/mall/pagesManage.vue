@@ -3,11 +3,13 @@
  * @Description: 
  * @Date: 2023-01-19 22:26:19
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 22:47:29
+ * @LastEditTime: 2023-01-20 11:59:57
 -->
 <template>
     <div class="body">pages-manage</div>
 </template>
+
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 input {
