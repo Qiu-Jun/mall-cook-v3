@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-21 22:16:16
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 23:02:53
+ * @LastEditTime: 2023-01-21 23:12:21
 -->
 <template>
     <div>
@@ -58,7 +58,7 @@
                 </el-empty>
             </div>
         </div>
-        <div class="flex-center mt50">
+        <div class="flex-center">
             <el-pagination
                 background
                 :page-size="state.paginationForm.pageSize"
@@ -176,7 +176,7 @@ modelList();
     }
 
     .wrap-list {
-        height: 65vh;
+        height: 72vh;
         overflow: auto;
 
         .model {
