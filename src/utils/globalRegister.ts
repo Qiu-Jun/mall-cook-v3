@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-18 17:29:59
  * @LastEditors: June
- * @LastEditTime: 2023-01-20 21:38:16
+ * @LastEditTime: 2023-01-21 21:59:46
  */
 import type { App } from 'vue';
 /**
@@ -17,6 +17,6 @@ export function registerGlobalComponents(app: App<Element>) {
     });
     Object.keys(globalCom).forEach((com: string) => {
         const component: any = globalCom[com];
-        app.component(component.name, component);
+        app.component(component.__name, component);
     });
 }

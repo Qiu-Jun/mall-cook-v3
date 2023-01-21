@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 18:41:11
+ * @LastEditTime: 2023-01-21 22:16:51
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -29,7 +29,7 @@ export default defineConfig({
             '@': path.resolve(__dirname, 'src'),
         },
         // 忽略后缀名的配置
-        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+        // extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
     },
     css: {
         preprocessorOptions: {

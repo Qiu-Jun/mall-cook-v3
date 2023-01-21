@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-18 23:58:39
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 16:29:53
+ * @LastEditTime: 2023-01-21 23:08:59
 -->
 <template>
     <div class="main">
@@ -132,7 +132,6 @@ onBeforeUnmount(() => {
 
             &::after {
                 position: absolute;
-                top: 10px; /*no*/
                 right: 10px; /*no*/
                 content: '';
                 width: 4px; /*no*/
