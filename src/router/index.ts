@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 13:21:40
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 22:46:36
+ * @LastEditTime: 2023-01-21 16:29:18
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
@@ -34,6 +34,78 @@ const routes: Array<RouteRecordRaw> = [
                 path: 'pagesManage',
                 name: 'PagesManage',
                 component: () => import('@/views/mall/pagesManage.vue'),
+            },
+            {
+                path: 'pageBuild',
+                name: 'PageBuild',
+                component: () => import('@/views/mall/pageBuild.vue'),
+            },
+            {
+                path: 'goods',
+                name: 'Goods',
+                component: () => import('@/views/mall/goods/index.vue'),
+                redirect: '/mall/goods/goodsManager',
+                children: [
+                    {
+                        path: 'goodsManager',
+                        name: 'GoodsManager',
+                        component: () =>
+                            import('@/views/mall/goods/goodsManager/index.vue'),
+                    },
+                    {
+                        path: 'goodsEdit',
+                        name: 'GoodsEdit',
+                        component: () =>
+                            import(
+                                '@/views/mall/goods/goodsManager/editGoods.vue'
+                            ),
+                    },
+                    {
+                        path: 'groupManager',
+                        name: 'GroupManager',
+                        component: () =>
+                            import('@/views/mall/goods/groupManager/index.vue'),
+                    },
+                ],
+            },
+
+            {
+                path: 'store',
+                name: 'store',
+                component: () => import('@/views/mall/store/index.vue'),
+                redirect: '/mall/store/navigationTpl',
+                children: [
+                    {
+                        path: 'navigationTpl',
+                        name: 'NavigationTpl',
+                        component: () =>
+                            import('@/views/mall/store/navigationTpl.vue'),
+                    },
+                    {
+                        path: 'searchTpl',
+                        name: 'SearchTpl',
+                        component: () =>
+                            import('@/views/mall/store/searchTpl.vue'),
+                    },
+                    {
+                        path: 'categoryTpl',
+                        name: 'CategoryTpl',
+                        component: () =>
+                            import('@/views/mall/store/categoryTpl.vue'),
+                    },
+                    {
+                        path: 'listTpl',
+                        name: 'ListTpl',
+                        component: () =>
+                            import('@/views/mall/store/listTpl.vue'),
+                    },
+                ],
+            },
+
+            {
+                path: 'modelManage',
+                name: 'ModelManage',
+                component: () => import('@/views/mall/modelManage.vue'),
             },
         ],
     },

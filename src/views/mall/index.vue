@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-18 23:58:39
  * @LastEditors: June
- * @LastEditTime: 2023-01-20 13:41:11
+ * @LastEditTime: 2023-01-21 16:29:53
 -->
 <template>
     <div class="main">
@@ -63,7 +63,7 @@ const state = reactive({
         {
             name: '模板',
             icon: 'icon-list',
-            path: '/mall/model-manage',
+            path: '/mall/modelManage',
         },
     ],
 });
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
         }
     }
 
-    .active {
+    .router-link-active {
         i {
             color: $color-theme !important;
         }
