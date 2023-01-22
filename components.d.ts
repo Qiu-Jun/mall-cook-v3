@@ -7,6 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ConfigCtn: typeof import('./src/components/global/configCtn.vue')['default']
+    ConfigItem: typeof import('./src/components/global/configItem.vue')['default']
+    ConfigWrap: typeof import('./src/components/global/configWrap.vue')['default']
     CreateDialog: typeof import('./src/components/createDialog/index.vue')['default']
     CustomSchemaTemplateSet: typeof import('./src/components/custom-schema-template-set/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -26,12 +29,14 @@ declare module '@vue/runtime-core' {
     GitControl: typeof import('./src/components/global/gitControl.vue')['default']
     HomeCover: typeof import('./src/components/saveDialog/homeCover.vue')['default']
     ModelsList: typeof import('./src/components/modelsList/index.vue')['default']
+    NavBar: typeof import('./src/components/navBar/index.vue')['default']
     PhoneCtn: typeof import('./src/components/global/phoneCtn.vue')['default']
     QrDialog: typeof import('./src/components/qrDialog/index.vue')['default']
     RealTimeView: typeof import('./src/components/realTimeView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SaveDialog: typeof import('./src/components/saveDialog/index.vue')['default']
+    SideBar: typeof import('./src/components/sideBar/index.vue')['default']
     TopBar: typeof import('./src/components/topBar/index.vue')['default']
   }
   export interface ComponentCustomProperties {

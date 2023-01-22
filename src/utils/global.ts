@@ -1,9 +1,12 @@
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 /*
  * @Author: June
  * @Description:
  * @Date: 2023-01-21 22:04:11
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 22:07:16
+ * @LastEditTime: 2023-01-22 18:00:20
  */
 /**
  * 生成随机数  （num 位随机数 + 时间戳）
@@ -80,4 +83,34 @@ export function getRandomCode(num = 8, stamp = true) {
         nums += data[r];
     }
     return stamp ? timestamp + nums : nums;
+}
+
+export function jump(data: any) {
+    console.log(data);
+    const { type, id } = data;
+    console.log(type);
+
+    // 跳转自定义页面
+    if (type === 'custom') {
+        if (!id) {
+            console.warn('自定义页面跳转未传递id');
+            return;
+        }
+
+        router.push({ name: 'custom', query: { pageId: id } });
+    }
+
+    // 跳转微页面
+    if (type == 'fixed') {
+        if (!id) {
+            console.warn('微页面跳转未传递id');
+            return;
+        }
+        router.push({ name: data.id });
+    }
+
+    // 跳转商品详情
+    if (type == 'goods') {
+        router.push({ name: 'goods-detail', query: { id } });
+    }
 }
