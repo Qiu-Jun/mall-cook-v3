@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-22 22:44:43
+ * @LastEditTime: 2023-01-23 22:41:11
  */
 import { createApp } from 'vue';
 import store from '@/store';
@@ -20,6 +20,9 @@ import 'element-plus/theme-chalk/el-message.css';
 import 'element-plus/theme-chalk/el-message-box.css';
 import 'element-plus/theme-chalk/el-notification.css';
 
+/**
+ * 图片上传
+ */
 function bootStrap() {
     const app = createApp(App);
     app.use(store);

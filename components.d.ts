@@ -7,10 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CMiniMCE: typeof import('./src/components/cMiniMCE/index.vue')['default']
     ConfigCtn: typeof import('./src/components/global/configCtn.vue')['default']
     ConfigItem: typeof import('./src/components/global/configItem.vue')['default']
     ConfigWrap: typeof import('./src/components/global/configWrap.vue')['default']
+    Control: typeof import('./src/components/control/index.vue')['default']
+    ControlConfig: typeof import('./src/components/control/controlConfig.vue')['default']
+    ControlPanel: typeof import('./src/components/control/controlPanel.vue')['default']
+    ControlWidgets: typeof import('./src/components/control/controlWidgets.vue')['default']
+    ControlWidgetShape: typeof import('./src/components/control/controlWidgetShape.vue')['default']
     CreateDialog: typeof import('./src/components/createDialog/index.vue')['default']
+    CTinymce: typeof import('./src/components/cTinymce/index.vue')['default']
     CustomSchemaTemplateSet: typeof import('./src/components/custom-schema-template-set/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']

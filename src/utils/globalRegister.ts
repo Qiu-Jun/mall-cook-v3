@@ -3,10 +3,11 @@
  * @Description:
  * @Date: 2023-01-18 17:29:59
  * @LastEditors: June
- * @LastEditTime: 2023-01-22 22:50:04
+ * @LastEditTime: 2023-01-23 21:57:34
  */
 import type { App } from 'vue';
 import vuedraggable from 'vuedraggable';
+
 /**
  * 注册对应包下所有组件
  * @param {*} path 包路径
