@@ -6,7 +6,7 @@ const router = useRouter();
  * @Description:
  * @Date: 2023-01-21 22:04:11
  * @LastEditors: June
- * @LastEditTime: 2023-01-22 18:00:20
+ * @LastEditTime: 2023-01-23 18:29:09
  */
 /**
  * 生成随机数  （num 位随机数 + 时间戳）
@@ -113,4 +113,14 @@ export function jump(data: any) {
     if (type == 'goods') {
         router.push({ name: 'goods-detail', query: { id } });
     }
+}
+
+// 价格显示 分 -> 元  （带两位小数）
+export function moneyDec(price: number) {
+    return (price / 100).toFixed(2);
+}
+
+// 价格显示 分 -> 元
+export function money(price: number) {
+    return price / 100;
 }
