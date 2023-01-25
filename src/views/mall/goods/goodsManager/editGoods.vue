@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-21 14:31:11
  * @LastEditors: June
- * @LastEditTime: 2023-01-23 22:30:23
+ * @LastEditTime: 2023-01-24 13:00:39
 -->
 <template>
     <div class="m20 p20 bg-white">
@@ -33,11 +33,12 @@
                 </div>
             </el-form-item>
             <el-form-item label="商品封面：" prop="cover" verify>
-                <Imgpond v-model="form.cover" :count="1" />
+                <c-tui-image-editor />
+                <!-- <Imgpond v-model="form.cover" :count="1" /> -->
                 <div class="f12 f-grey">建议尺寸：800*800像素</div>
             </el-form-item>
             <el-form-item label="商品图：" prop="imgList" verify>
-                <Imgpond v-model="form.imgList" :count="10" />
+                <!-- <Imgpond v-model="form.imgList" :count="10" /> -->
                 <div class="f12 f-grey">
                     建议尺寸：800*800像素，你可以拖拽图片调整顺序，最多上传10张
                 </div>
