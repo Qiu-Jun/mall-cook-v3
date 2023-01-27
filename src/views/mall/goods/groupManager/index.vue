@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-21 14:28:33
  * @LastEditors: June
- * @LastEditTime: 2023-01-23 18:46:18
+ * @LastEditTime: 2023-01-27 22:22:38
 -->
 <template>
     <div class="m20 p20 bg-white">
@@ -98,52 +98,81 @@
             </draggable>
         </div>
 
-        <!-- <edit ref="edit"></edit> -->
+        <edit ref="editRef"></edit>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import useProject from '@/store/modules/project';
 import { debounce } from 'lodash-es';
-import { futimes } from 'fs';
+import edit from './edit.vue';
+
 const projectStore = useProject();
 const project = computed(() => projectStore.project);
 
-const allUnFold = debounce(function (item: any) {
-    console.log('ss');
+const editRef = ref<any>(null);
+// 折叠全部
+const allFold = debounce(function () {
+    projectStore.project.config.goodsGroups.map(
+        (item: any) => (item.fold = false),
+    );
 }, 300);
 
-const allFold = debounce(function (item: any) {
-    console.log('ss');
+// 折叠
+const fold = debounce(function (group: any) {
+    group.fold = group.fold ? false : true;
 }, 300);
 
-const fold = debounce(function (item: any) {
-    console.log('ss');
+// 展开全部
+const allUnFold = debounce(function () {
+    projectStore.project.config.goodsGroups.map(
+        (item: any) => (item.fold = true),
+    );
 }, 300);
 
-const addType = debounce(function (item: any) {
-    console.log('ss');
+// 新增一级分组
+const addGroup = debounce(function () {
+    editRef.value?.open(1);
 }, 300);
 
-const delGroup = debounce(function (item: any) {
-    console.log(item);
+// 编辑一级分组
+const editGroup = debounce(function (data: any) {
+    editRef.value?.open(2, data);
 }, 300);
 
-const editGroup = debounce(function (item: any) {
-    console.log('ss');
+// 删除一级分组
+const delGroup = debounce(function (data: any) {
+    const groups = projectStore.project.config.goodsGroups.find(
+        (item: any) => item.type == data.parentType,
+    );
+    const index = groups.reduce((pre: any, cur: any, i: any) => {
+        if (cur.type == data.type) pre = i;
+        return pre;
+    }, 0);
+    groups.splice(index, 1);
 }, 300);
 
-const addGroup = debounce(function (item: any) {
-    console.log('ss');
+// 新增二级分组
+const addType = debounce(function () {
+    editRef.value?.open(2);
 }, 300);
 
-const editType = debounce(function (item: any) {
-    console.log('ss');
+// 编辑二级分组
+const editType = debounce(function (data: any) {
+    editRef.value?.open(2, data);
 }, 300);
 
-const delType = debounce(function (item: any) {
-    console.log('ss');
+// 删除二级分组
+const delType = debounce(function (data: any) {
+    const temp = projectStore.project.config.goodsGroups.find(
+        (item: any) => item.type == data.parentType,
+    );
+    const index = temp.child.reduce((pre: any, cur: any, i: any) => {
+        if (cur.type == data.type) pre = i;
+        return pre;
+    }, 0);
+    temp.child.splice(index, 1);
 }, 300);
 </script>
 

@@ -23,7 +23,7 @@ yarn dev # or npm run dev
 -   [x] 目录搭建
 -   [x] commitlint
 -   [ ] 升级迁移(进行中)
--   [ ] 基于fabric重写图片编辑组件
+-   [ ] 基于 fabric 重写图片编辑组件
 -   [ ] ts 类型优化，目前用了很多 any
 
 ## pr
