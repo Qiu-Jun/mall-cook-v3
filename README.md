@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 12:17:13
+ * @LastEditTime: 2023-01-27 21:51:15
 -->
 
 ## Mall-Cook-v3
@@ -23,6 +23,7 @@ yarn dev # or npm run dev
 -   [x] 目录搭建
 -   [x] commitlint
 -   [ ] 升级迁移(进行中)
+-   [ ] 基于fabric重写图片编辑组件
 -   [ ] ts 类型优化，目前用了很多 any
 
 ## pr
