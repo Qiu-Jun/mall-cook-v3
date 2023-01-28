@@ -3,16 +3,151 @@
  * @Description: 
  * @Date: 2023-01-27 22:07:11
  * @LastEditors: June
- * @LastEditTime: 2023-01-27 22:16:34
+ * @LastEditTime: 2023-01-28 15:34:16
 -->
 <template>
-    <div>edit</div>
+    <div class="edit">
+        <el-dialog
+            v-model="state.show"
+            :title="state.type === 'add' ? '新增分组' : '编辑分组'"
+            width="25%"
+        >
+            <div class="auto-center">
+                <el-form
+                    ref="ruleForm"
+                    :model="state.form"
+                    label-width="120px"
+                    class="demo-ruleForm"
+                >
+                    <el-form-item label="级别" prop="level" verify>
+                        <el-radio
+                            v-model="state.form.level"
+                            :label="1"
+                            :disabled="state.type === 'edit'"
+                            >一级</el-radio
+                        >
+                        <el-radio
+                            v-model="state.form.level"
+                            :label="2"
+                            :disabled="state.type === 'edit'"
+                            >二级</el-radio
+                        >
+                    </el-form-item>
+
+                    <el-form-item
+                        v-if="state.form.level === 1"
+                        label="一级分组名称"
+                        prop="name"
+                        :verify="{ maxLen: 4 }"
+                    >
+                        <el-input
+                            v-model="state.form.name"
+                            maxlength="4"
+                            show-word-limit
+                            style="width: 150px"
+                            size="small"
+                        ></el-input>
+                    </el-form-item>
+
+                    <template v-if="state.form.level === 2">
+                        <el-form-item label="上级分组" prop="parentType" verify>
+                            <el-select
+                                v-model="state.form.parentType"
+                                placeholder="请选择上级分组"
+                                style="width: 150px"
+                                size="small"
+                                :disabled="state.type === 'edit'"
+                            >
+                                <el-option
+                                    v-for="item in project.config.goodsGroups"
+                                    :key="item.type"
+                                    :label="item.name"
+                                    :value="item.type"
+                                >
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item
+                            label="二级分组名称"
+                            prop="name"
+                            :verify="{ maxLen: 6 }"
+                        >
+                            <el-input
+                                v-model="state.form.name"
+                                maxlength="4"
+                                show-word-limit
+                                style="width: 150px"
+                                size="small"
+                            ></el-input>
+                        </el-form-item>
+                        <el-form-item label="二级分组图片" prop="image" verify>
+                            <c-tui-image-editor />
+                        </el-form-item>
+                        <el-form-item label="二级分组商品" prop="shopList">
+                            <groupGoods
+                                v-model="state.form.shopList"
+                            ></groupGoods>
+                        </el-form-item>
+                    </template>
+                </el-form>
+            </div>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="close">取 消</el-button>
+                    <el-button type="primary" @click="submitForm"
+                        >确 定</el-button
+                    >
+                </span>
+            </template>
+        </el-dialog>
+    </div>
 </template>
 
 <script lang="ts" setup>
+import { reactive, computed } from 'vue';
+import useProject from '@/store/modules/project';
+import groupGoods from './groupGoods.vue';
+import { cloneDeep } from 'lodash-es';
+
+const state = reactive({
+    type: 'add',
+    form: {
+        level: 1,
+        name: '',
+        parentType: '',
+        image: '',
+        shopList: [],
+    },
+    show: false,
+});
+
+const projectStore = useProject();
+const project = computed(() => projectStore.project);
+
 const open = (level: number, data: any) => {
-    console.log(level, data);
+    if (!data) {
+        state.type = 'add';
+        state.form.level = level;
+    } else {
+        state.type = 'edit';
+        state.form = cloneDeep(data);
+    }
+    state.show = true;
 };
 
+const close = () => {};
+
+const submitForm = () => {};
+
+const add = () => {};
+
+const edit = () => {};
 defineExpose({ open });
 </script>
+
+<style lang="scss" scoped>
+:deep(.el-dialog__body) {
+    display: inline-block;
+    margin: 0 auto;
+}
+</style>
