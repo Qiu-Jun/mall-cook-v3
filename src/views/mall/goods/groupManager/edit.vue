@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-27 22:07:11
  * @LastEditors: June
- * @LastEditTime: 2023-01-28 15:34:16
+ * @LastEditTime: 2023-01-28 15:51:28
 -->
 <template>
     <div class="edit">
@@ -14,7 +14,7 @@
         >
             <div class="auto-center">
                 <el-form
-                    ref="ruleForm"
+                    ref="formRef"
                     :model="state.form"
                     label-width="120px"
                     class="demo-ruleForm"
@@ -104,18 +104,21 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import useProject from '@/store/modules/project';
 import groupGoods from './groupGoods.vue';
 import { cloneDeep } from 'lodash-es';
+import { getRandomCode } from '@/utils/global';
 
 const state = reactive({
     type: 'add',
     form: {
         level: 1,
         name: '',
+        type: '',
         parentType: '',
         image: '',
+        child: [],
         shopList: [],
     },
     show: false,
@@ -123,6 +126,8 @@ const state = reactive({
 
 const projectStore = useProject();
 const project = computed(() => projectStore.project);
+
+const formRef = ref<any>(null);
 
 const open = (level: number, data: any) => {
     if (!data) {
@@ -135,13 +140,67 @@ const open = (level: number, data: any) => {
     state.show = true;
 };
 
-const close = () => {};
+const close = () => {
+    state.type = 'add';
+    state.form = {
+        level: 1,
+        type: '',
+        name: '',
+        parentType: '',
+        image: '',
+        shopList: [],
+        child: [],
+    };
+    state.show = false;
+};
 
-const submitForm = () => {};
+const add = () => {
+    // 新增一级分类
+    if (state.form.level === 1) {
+        state.form.type = getRandomCode(4);
+        state.form.child = [];
+        project.value.config.goodsGroups.push(state.form);
+    } else {
+        // 新增二级分类
+        state.form.type = getRandomCode(4);
+        const temp = projectStore.project.config.goodsGroups.find(
+            (item: any) => item.type == state.form.parentType,
+        );
+        temp.child.push(state.form);
+    }
+};
 
-const add = () => {};
+const edit = () => {
+    // 编辑一级分类
+    if (state.form.level === 1) {
+        const temp = projectStore.project.config.goodsGroups.find(
+            (item: any) => item.type === state.form.type,
+        );
+        temp.name = state.form.name;
+    } else {
+        // 编辑二级分类
+        const temp = projectStore.project.config.goodsGroups.find(
+            (item: any) => item.type === state.form.parentType,
+        );
+        const index = temp.child.reduce((pre: any, cur: any, i: any) => {
+            if (cur.type === state.form.type) pre = i;
+            return pre;
+        }, 0);
+        temp.child.splice(index, 1, state.form);
+    }
+};
 
-const edit = () => {};
+const submitForm = () => {
+    formRef.value?.validate((valid: boolean) => {
+        if (valid) {
+            state.type == 'add' ? add() : edit();
+            close();
+        } else {
+            return false;
+        }
+    });
+};
+
 defineExpose({ open });
 </script>
 

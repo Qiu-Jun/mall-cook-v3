@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-21 14:28:33
  * @LastEditors: June
- * @LastEditTime: 2023-01-27 22:22:38
+ * @LastEditTime: 2023-01-28 15:53:24
 -->
 <template>
     <div class="m20 p20 bg-white">
@@ -143,9 +143,7 @@ const editGroup = debounce(function (data: any) {
 
 // 删除一级分组
 const delGroup = debounce(function (data: any) {
-    const groups = projectStore.project.config.goodsGroups.find(
-        (item: any) => item.type == data.parentType,
-    );
+    const groups = projectStore.project.config.goodsGroups;
     const index = groups.reduce((pre: any, cur: any, i: any) => {
         if (cur.type == data.type) pre = i;
         return pre;
