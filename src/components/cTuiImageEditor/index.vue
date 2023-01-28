@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-24 12:52:18
  * @LastEditors: June
- * @LastEditTime: 2023-01-24 22:56:13
+ * @LastEditTime: 2023-01-28 19:20:45
 -->
 <template>
     <el-upload
@@ -21,15 +21,15 @@
         v-model="state.show"
         title="编辑图片"
         width="50%"
-        :before-close="onClick"
+        :before-close="onClose"
     >
         <div style="height: 700px">
             <div id="tui-image-editor"></div>
         </div>
         <template #footer>
             <span class="dialog-footer">
-                <el-button @click="onClick">取消</el-button>
-                <el-button type="primary" @click="onClick"> 确认 </el-button>
+                <el-button @click="onClose">取消</el-button>
+                <el-button type="primary" @click="onConfirm"> 确认 </el-button>
             </span>
         </template>
     </el-dialog>
@@ -43,6 +43,8 @@ import { ElMessage } from 'element-plus';
 import { locale_zh } from './lang/zh';
 import customTheme from './styles/customTheme';
 import 'tui-image-editor/dist/tui-image-editor.css';
+import { upload } from '@/apis/utils';
+import { fileToBlob, toBinary } from '@/utils/file';
 
 const state = reactive({
     show: false,
@@ -68,13 +70,16 @@ const onOpen = () => {
     state.show = true;
 };
 
-const onClick = () => {
+const onClose = () => {
     state.show = false;
 };
 
+let instance = null;
+
 const initImgEditor = () => {
     nextTick(() => {
-        const instance = new ImageEditor(
+        // var file_name=file_path.replace(/(.*\/)*([^.]+).*/ig,"$2");
+        instance = new ImageEditor(
             document.querySelector('#tui-image-editor'),
             {
                 usageStatistics: false,
@@ -93,6 +98,42 @@ const initImgEditor = () => {
             },
         );
     });
+};
+
+function getFile(dataurl, filename = 'file') {
+    let arr = dataurl.split(',');
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let suffix = mime.split('/')[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], `${filename}.${suffix}`, {
+        type: mime,
+    });
+}
+
+const onConfirm = async () => {
+    const base64String = instance?.toDataURL();
+    const file = getFile(base64String);
+    console.log(file);
+
+    // const data = window.atob(base64String.split(',')[1]);
+    // const ia = new Uint8Array(data.length);
+    // for (let i = 0; i < data.length; i++) {
+    //     ia[i] = data.charCodeAt(i);
+    // }
+    // const file = new File([ia], '333', { type: 'image/png' });
+
+    upload({ file })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 </script>
 

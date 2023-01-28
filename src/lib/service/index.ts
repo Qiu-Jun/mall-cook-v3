@@ -3,11 +3,16 @@
  * @Description:
  * @Date: 2023-01-17 13:31:07
  * @LastEditors: June
- * @LastEditTime: 2023-01-19 18:25:17
+ * @LastEditTime: 2023-01-28 20:02:25
  */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
 import store from '@/store';
+
+interface HRequestConfig extends AxiosRequestConfig {
+    interceptors?: HRequestConfig;
+    headers?: any;
+}
 
 const service: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
@@ -16,11 +21,13 @@ const service: AxiosInstance = axios.create({
 });
 
 service.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
+    (config: HRequestConfig) => {
         config.headers = {
             Authorization: store.state.value.user.token,
-            'Content-Type': 'application/json',
+            'Content-Type':
+                config.headers['Content-Type'] || 'application/json',
         };
+
         return config;
     },
     (error) => {
