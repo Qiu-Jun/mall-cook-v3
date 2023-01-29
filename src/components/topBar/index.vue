@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-19 22:40:27
  * @LastEditors: June
- * @LastEditTime: 2023-01-20 13:35:07
+ * @LastEditTime: 2023-01-29 19:57:12
 -->
 <template>
     <div class="topBar">
@@ -72,7 +72,10 @@ const handleSave = debounce(function () {
 }, 300);
 
 const toSchema = debounce(function () {
-    console.log('toSchema');
+    let { href } = router.resolve({
+        path: '/schema',
+    });
+    window.open(href);
 }, 300);
 
 const viewQr = debounce(function () {

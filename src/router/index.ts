@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 13:21:40
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 16:29:18
+ * @LastEditTime: 2023-01-29 19:58:58
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import store from '@/store';
@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
+    },
+    {
+        path: '/schema',
+        name: 'Schema',
+        component: () => import('@/views/schema/index.vue'),
     },
     {
         path: '/mall',

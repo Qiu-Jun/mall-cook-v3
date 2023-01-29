@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-25 22:38:21
+ * @LastEditTime: 2023-01-29 19:34:54
  */
 import { createApp } from 'vue';
 import store from '@/store';
@@ -12,6 +12,8 @@ import App from './App.vue';
 import {
     registerGlobalComponents,
     registerConfigComponent,
+    registerScemaConfig,
+    registerSchemaInitializing,
 } from '@/utils/globalRegister';
 
 // 适配
@@ -32,6 +34,8 @@ function bootStrap() {
     app.use(router);
     registerGlobalComponents(app);
     registerConfigComponent(app);
+    registerScemaConfig(app);
+    registerSchemaInitializing(app);
     app.mount('#app');
 }
 
