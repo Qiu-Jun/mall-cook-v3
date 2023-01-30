@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-19 22:40:27
  * @LastEditors: June
- * @LastEditTime: 2023-01-29 19:57:12
+ * @LastEditTime: 2023-01-30 16:07:52
 -->
 <template>
     <div class="topBar">
@@ -35,14 +35,19 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, defineAsyncComponent } from 'vue';
+import { reactive, computed, defineAsyncComponent } from 'vue';
 import { debounce } from 'lodash-es';
 import { useRouter } from 'vue-router';
 import useUser from '@/store/modules/user';
-import { ElMessageBox } from 'element-plus';
+import useProject from '@/store/modules/project';
+import { ElMessageBox, ElNotification } from 'element-plus';
+import { editProject } from '@/apis/project';
 
 const router = useRouter();
 const userStore = useUser();
+const projectStore = useProject();
+
+const project = computed(() => projectStore.project);
 
 // 异步组件
 const saveDialg = defineAsyncComponent(
@@ -67,8 +72,22 @@ const handleBack = debounce(function () {
     });
 }, 300);
 
-const handleSave = debounce(function () {
+const handleSave = debounce(async function () {
     console.log('1');
+    const params = {
+        id: project.value.id,
+        userId: userStore.userInfo.userId,
+        name: project.value.name,
+        richText: JSON.stringify(project.value),
+    };
+    const { status } = await editProject(params);
+    if (status === '10000') {
+        ElNotification({
+            title: '成功',
+            message: '项目保存成功',
+            type: 'success',
+        });
+    }
 }, 300);
 
 const toSchema = debounce(function () {
