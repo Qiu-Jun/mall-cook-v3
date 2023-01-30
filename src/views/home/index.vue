@@ -59,10 +59,12 @@ import { ElMessageBox } from 'element-plus';
 import { debounce, cloneDeep } from 'lodash-es';
 import { getProjectList, delProject } from '@/apis/project';
 import useUser from '@/store/modules/user';
+import useProject from '@/store/modules/project';
 import { mallTypeList } from '@/config/mall';
 import { useRouter } from 'vue-router';
 
 const userStore = useUser();
+const projectStore = useProject();
 const router = useRouter();
 
 const state = reactive<any>({
@@ -91,8 +93,9 @@ const getProject = async () => {
     }
 };
 
-const handleUpdate = debounce(function (item) {
-    console.log(item);
+const handleUpdate = debounce(function (project) {
+    projectStore.setProject(project);
+    router.push({ path: '/mall' });
 }, 300);
 
 const handleDel = debounce(function (id) {
