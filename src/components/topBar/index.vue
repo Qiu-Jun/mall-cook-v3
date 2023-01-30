@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-19 22:40:27
  * @LastEditors: June
- * @LastEditTime: 2023-01-30 16:07:52
+ * @LastEditTime: 2023-01-30 16:09:43
 -->
 <template>
     <div class="topBar">
@@ -73,7 +73,6 @@ const handleBack = debounce(function () {
 }, 300);
 
 const handleSave = debounce(async function () {
-    console.log('1');
     const params = {
         id: project.value.id,
         userId: userStore.userInfo.userId,
