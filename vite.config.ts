@@ -3,13 +3,14 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-21 22:16:51
+ * @LastEditTime: 2023-01-30 22:55:28
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import viteCompression from 'vite-plugin-compression';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
@@ -22,6 +23,7 @@ export default defineConfig({
         Components({
             resolvers: [ElementPlusResolver()],
         }),
+        viteCompression(),
     ],
     resolve: {
         //设置别名

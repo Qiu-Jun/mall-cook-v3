@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-21 14:28:33
  * @LastEditors: June
- * @LastEditTime: 2023-01-28 16:56:45
+ * @LastEditTime: 2023-01-30 22:58:10
 -->
 <template>
     <div class="m20 p20 bg-white">
@@ -99,7 +99,7 @@
         </div>
 
         <edit ref="editRef"></edit>
-        <modeSelect />
+        <!-- <modeSelect /> -->
     </div>
 </template>
 
@@ -108,7 +108,7 @@ import { ref, computed } from 'vue';
 import useProject from '@/store/modules/project';
 import { debounce } from 'lodash-es';
 import edit from './edit.vue';
-import modeSelect from '@/components/modeSelect/index.vue';
+// import modeSelect from '@/components/modeSelect/index.vue';
 
 const projectStore = useProject();
 const project = computed(() => projectStore.project);
