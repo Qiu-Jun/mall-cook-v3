@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-29 18:19:52
  * @LastEditors: June
- * @LastEditTime: 2023-01-29 22:40:17
+ * @LastEditTime: 2023-01-31 16:17:20
 -->
 <template>
     <el-dialog v-model="state.show" title="导出" width="40%">
@@ -30,7 +30,8 @@
 
 <script lang="ts" setup>
 import { reactive, inject, watch } from 'vue';
-import jsonViewer from 'vue3-json-viewer';
+import jsonViewer from 'vue-json-viewer';
+import 'vue-json-viewer/style.css';
 
 const state = reactive<any>({
     show: false,

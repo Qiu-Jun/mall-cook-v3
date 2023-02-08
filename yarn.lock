@@ -1218,7 +1218,7 @@ cli-width@^3.0.0:
   resolved "https://registry.npmmirror.com/cli-width/-/cli-width-3.0.0.tgz#a2f48437a2caa9a22436e794bf071ec9e61cedf6"
   integrity sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==
 
-clipboard@^2.0.10, clipboard@^2.0.11:
+clipboard@^2.0.11, clipboard@^2.0.4:
   version "2.0.11"
   resolved "https://registry.npmmirror.com/clipboard/-/clipboard-2.0.11.tgz#62180360b97dd668b6b3a84ec226975762a70be5"
   integrity sha512-C+0bbOqkezLIsmWSvlsXS0Q0bmkugu7jcfMIACB+RDEntIzQIkdr148we28AfSloQLRdZlYL/QYyrq05j/3Faw==
@@ -4307,6 +4307,13 @@ vue-global-config@^0.3.1:
     lodash-es "^4.17.21"
     vue-demi "^0.13.11"
 
+vue-json-viewer@3:
+  version "3.0.4"
+  resolved "https://registry.npmmirror.com/vue-json-viewer/-/vue-json-viewer-3.0.4.tgz#c1d65515e57d4036defbbc18fa942d7fd5fb9a8b"
+  integrity sha512-pnC080rTub6YjccthVSNQod2z9Sl5IUUq46srXtn6rxwhW8QM4rlYn+CTSLFKXWfw+N3xv77Cioxw7B4XUKIbQ==
+  dependencies:
+    clipboard "^2.0.4"
+
 vue-router@^4.1.6:
   version "4.1.6"
   resolved "https://registry.npmmirror.com/vue-router/-/vue-router-4.1.6.tgz#b70303737e12b4814578d21d68d21618469375a1"
@@ -4329,13 +4336,6 @@ vue-tsc@^1.0.11:
   dependencies:
     "@volar/vue-language-core" "1.0.24"
     "@volar/vue-typescript" "1.0.24"
-
-vue3-json-viewer@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmmirror.com/vue3-json-viewer/-/vue3-json-viewer-2.2.2.tgz#43a512f378c602bb6b7f2a72adeaf7d15b443885"
-  integrity sha512-56l3XDGggnpwEqZieXsSMhNT4NhtO6d7zuSAxHo4i0UVxymyY2jRb7UMQOU1ztChKALZCAzX7DlgrsnEhxu77A==
-  dependencies:
-    clipboard "^2.0.10"
 
 vue@^3.2.45:
   version "3.2.45"
