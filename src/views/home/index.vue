@@ -68,7 +68,6 @@ const projectStore = useProject();
 const router = useRouter();
 
 const state = reactive<any>({
-    loading: false,
     list: [],
 });
 
@@ -254,6 +253,7 @@ getProject();
             }
         }
     }
+
     .footer {
         height: 200px;
         width: 100%;
