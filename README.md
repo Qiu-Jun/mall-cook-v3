@@ -3,12 +3,20 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-27 21:51:15
+ * @LastEditTime: 2023-02-09 11:57:01
 -->
 
 ## Mall-Cook-v3
 
-Mall-Cook-v3[mall-cook 的升级版](https://github.com/wangyuan389/mall-cook)
+[商城低代码平台, mall-cook的升级版](https://github.com/wangyuan389/mall-cook)
+
+## TODO
+-   [x] 目录搭建(基于Vue3、Vite、Pinia)
+-   [x] 代码规范处理(eslint + prettier) 
+-   [x] husky代码提交规范
+-   [ ] 升级迁移(进行中)
+-   [ ] 基于fabric重写图片编辑组件
+-   [ ] ts 类型优化，目前用了很多 any
 
 ## 使用
 
@@ -17,14 +25,6 @@ Mall-Cook-v3[mall-cook 的升级版](https://github.com/wangyuan389/mall-cook)
 yarn install # or npm install
 yarn dev # or npm run dev
 ```
-
-## TODO
-
--   [x] 目录搭建
--   [x] commitlint
--   [ ] 升级迁移(进行中)
--   [ ] 基于 fabric 重写图片编辑组件
--   [ ] ts 类型优化，目前用了很多 any
 
 ## pr
 
