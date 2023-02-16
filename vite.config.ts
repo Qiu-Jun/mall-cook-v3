@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-30 22:55:28
+ * @LastEditTime: 2023-02-16 14:15:39
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -47,6 +47,17 @@ export default defineConfig({
                 target: 'http://110.41.150.71:3000',
                 changeOrigin: true,
                 rewrite: (path: string) => path.replace(/^\/api/, ''),
+            },
+        },
+    },
+
+    build: {
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                //生产环境时移除console
+                drop_console: true,
+                drop_debugger: true,
             },
         },
     },

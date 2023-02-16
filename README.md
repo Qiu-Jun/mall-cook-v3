@@ -8,14 +8,15 @@
 
 ## Mall-Cook-v3
 
-[商城低代码平台, mall-cook的升级版](https://github.com/wangyuan389/mall-cook)
+[商城低代码平台, mall-cook 的升级版](https://github.com/wangyuan389/mall-cook)
 
 ## TODO
--   [x] 目录搭建(基于Vue3、Vite、Pinia)
--   [x] 代码规范处理(eslint + prettier) 
--   [x] husky代码提交规范
+
+-   [x] 目录搭建(基于 Vue3、Vite、Pinia)
+-   [x] 代码规范处理(eslint + prettier)
+-   [x] husky 代码提交规范
 -   [ ] 升级迁移(进行中)
--   [ ] 基于fabric重写图片编辑组件
+-   [ ] 基于 fabric 重写图片编辑组件
 -   [ ] ts 类型优化，目前用了很多 any
 
 ## 使用
