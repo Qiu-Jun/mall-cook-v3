@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-01-24 12:52:18
  * @LastEditors: June
- * @LastEditTime: 2023-01-28 19:20:45
+ * @LastEditTime: 2023-03-06 00:28:46
 -->
 <template>
     <el-upload
@@ -17,32 +17,22 @@
         <img v-if="state.imageUrl" :src="state.imageUrl" class="avatar" />
         <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
     </el-upload>
-    <el-dialog
-        v-model="state.show"
-        title="编辑图片"
-        width="50%"
-        :before-close="onClose"
-    >
-        <div style="height: 700px">
-            <div id="tui-image-editor"></div>
-        </div>
-        <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="onClose">取消</el-button>
-                <el-button type="primary" @click="onConfirm"> 确认 </el-button>
-            </span>
-        </template>
-    </el-dialog>
+
+    <ie-dialog
+        v-model:imgSrc="state.imageUrl"
+        v-model:visible="state.show"
+        @result="editOnChange"
+    />
 </template>
 
 <script setup>
 import { reactive, nextTick } from 'vue';
 import { Plus } from '@element-plus/icons-vue';
-import ImageEditor from 'tui-image-editor';
+// import ImageEditor from 'tui-image-editor';
 import { ElMessage } from 'element-plus';
 import { locale_zh } from './lang/zh';
 import customTheme from './styles/customTheme';
-import 'tui-image-editor/dist/tui-image-editor.css';
+// import 'tui-image-editor/dist/tui-image-editor.css';
 import { upload } from '@/apis/utils';
 import { fileToBlob, toBinary } from '@/utils/file';
 
@@ -55,7 +45,6 @@ const onChange = (file) => {
     if (!file || !file.raw) return;
     state.imageUrl = URL.createObjectURL(file.raw);
     onOpen();
-    initImgEditor();
 };
 
 const beforeAvatarUpload = (rawFile) => {
@@ -115,10 +104,9 @@ function getFile(dataurl, filename = 'file') {
     });
 }
 
-const onConfirm = async () => {
-    const base64String = instance?.toDataURL();
-    const file = getFile(base64String);
-    console.log(file);
+const editOnChange = async (e) => {
+    console.log(e);
+    const file = getFile(e);
 
     // const data = window.atob(base64String.split(',')[1]);
     // const ia = new Uint8Array(data.length);
@@ -129,7 +117,8 @@ const onConfirm = async () => {
 
     upload({ file })
         .then((res) => {
-            console.log(res);
+            state.imageUrl = res.data;
+            onClose();
         })
         .catch((err) => {
             console.log(err);

@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-02-09 11:57:01
+ * @LastEditTime: 2023-03-06 00:42:24
 -->
 
 ## Mall-Cook-v3
@@ -16,7 +16,7 @@
 -   [x] 代码规范处理(eslint + prettier)
 -   [x] husky 代码提交规范
 -   [ ] 升级迁移(进行中)
--   [ ] 基于 fabric 重写图片编辑组件
+-   [ ] 基于 konvajs 重写图片编辑组件(进行中)
 -   [ ] ts 类型优化，目前用了很多 any
 
 ## 使用

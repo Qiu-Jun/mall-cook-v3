@@ -51,10 +51,12 @@
     </div>
 
     <create-dialog ref="createDialogRef" />
+
+    <ie-dialog> </ie-dialog>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import { debounce, cloneDeep } from 'lodash-es';
 import { getProjectList, delProject } from '@/apis/project';

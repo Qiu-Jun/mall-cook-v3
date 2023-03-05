@@ -3,12 +3,14 @@
  * @Description:
  * @Date: 2023-01-17 12:46:35
  * @LastEditors: June
- * @LastEditTime: 2023-01-29 19:34:54
+ * @LastEditTime: 2023-03-04 00:43:28
  */
 import { createApp } from 'vue';
 import store from '@/store';
 import router from '@/router';
 import App from './App.vue';
+import ieDialog from 'ie-dialog';
+import 'ie-dialog/dist/style.css';
 import {
     registerGlobalComponents,
     registerConfigComponent,
@@ -32,6 +34,7 @@ function bootStrap() {
     const app = createApp(App);
     app.use(store);
     app.use(router);
+    app.use(ieDialog);
     registerGlobalComponents(app);
     registerConfigComponent(app);
     registerScemaConfig(app);

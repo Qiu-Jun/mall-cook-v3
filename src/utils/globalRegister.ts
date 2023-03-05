@@ -3,11 +3,11 @@
  * @Description:
  * @Date: 2023-01-18 17:29:59
  * @LastEditors: June
- * @LastEditTime: 2023-01-29 19:53:23
+ * @LastEditTime: 2023-03-04 00:37:54
  */
 import type { App } from 'vue';
 import vuedraggable from 'vuedraggable';
-import cTuiImageEditor from '@/components/cTuiImageEditor/index.vue';
+// import cTuiImageEditor from '@/components/cTuiImageEditor/index.vue';
 
 /**
  * 注册对应包下所有组件
@@ -23,7 +23,7 @@ export function registerGlobalComponents(app: App<Element>) {
         app.component(component.__name, component);
     });
     app.component('Draggable', vuedraggable);
-    app.component('CTuiImageEditor', cTuiImageEditor);
+    // app.component('CTuiImageEditor', cTuiImageEditor);
 }
 
 // 注册所有配置组件
